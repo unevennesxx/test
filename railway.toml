@@ -1,0 +1,28 @@
+# railway.toml
+
+[project]
+# Name of your project
+name = "myproject"
+
+[build]
+# Install the required dependencies listed in your requirements.txt
+command = "pip install -r requirements.txt"
+
+[deploy]
+# Commands to run after the build process
+start = "python manage.py migrate && gunicorn myproject.wsgi:application --bind 0.0.0.0:$PORT"
+
+[env]
+# Set environment variables needed for Django to run correctly
+
+# Specify your settings module
+DJANGO_SETTINGS_MODULE = "myproject.settings.production"
+
+# Set DEBUG to False for production
+DEBUG = "False"
+
+# Replace with your actual Django secret key
+SECRET_KEY = "django-insecure-^1xb5ogr54_5b)yc8#rrt_gkf#eouxel7nyd(p!2uy&_26l8qu"
+
+# Optional: Disable collectstatic if you manage static files differently
+DISABLE_COLLECTSTATIC = "1"
